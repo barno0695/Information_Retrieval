@@ -11,12 +11,12 @@ Progress:   Total no. of authors now = 11143... Shortlisted the ones who have > 
 			Some code has been written for LDA training but is basically unupdated
 			
 
-################################ Run the following commands to set up the system #######################################################
+#Run the following commands to set up the system #######################################
 
-### First clone this repo to your local machine if you have not done so. 'duhh!!'
-### The command for cloning is - "git clone <enter the url here>"
-### If that gives error, maybe you don't have git installed on your machine. Run 'sudo apt-get install git' and retry 
-### Upon successful cloning, run 'cd Information_Retrieval' and continue with the commands below (without the quotes, of course!)
+First clone this repo to your local machine if you have not done so. 'duhh!!'
+The command for cloning is - "git clone https://github.com/priyankpalod/Information_Retrieval.git
+If that gives error, maybe you don't have git installed on your machine. Run 'sudo apt-get install git' and retry 
+Upon successful cloning, run 'cd Information_Retrieval' and continue with the commands below (without the quotes, of course!)
 
 
 "scp 13CS10037@10.5.18.104:./Information_Retrieval/dumped_data_all_papers . "				# Copies the 17GB file... will take some time
