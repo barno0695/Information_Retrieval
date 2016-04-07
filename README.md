@@ -7,16 +7,15 @@ Progress:   Total no. of authors now = 11143... Shortlisted the ones who have > 
 				1. Diverse (cosine similarity <= 0.2) - in diverse_coauthors.p
 				2. Similar (cosine similarity > 0.2)  - in similar_coauthors.p
 			We wrote the code to find the fields of citations of every paper in a dictionary 'citation_field_vectors.p' but citation network info that we have seems unadequete/different to be meaningful. I thought we should go by grepping '#index|#%f' in all papers data but even that can not be done since dumped_data_all_authors does not have lines starting from '#%f' (No field information for citations in the dataset)... May be we have to drop this feature.
-
 			Some code has been written for LDA training but is basically unupdated
 			
 
 #Run the following commands to set up the system #######################################
 
-First clone this repo to your local machine if you have not done so. 'duhh!!'
-The command for cloning is - "git clone https://github.com/priyankpalod/Information_Retrieval.git
-If that gives error, maybe you don't have git installed on your machine. Run 'sudo apt-get install git' and retry 
-Upon successful cloning, run 'cd Information_Retrieval' and continue with the commands below (without the quotes, of course!)
+#First clone this repo to your local machine if you have not done so. 'duhh!!'
+#The command for cloning is - "git clone https://github.com/priyankpalod/Information_Retrieval.git
+#If that gives error, maybe you don't have git installed on your machine. Run 'sudo apt-get install git' and retry 
+#Upon successful cloning, run 'cd Information_Retrieval' and continue with the commands below (without the quotes, of course!)
 
 
 "scp 13CS10037@10.5.18.104:./Information_Retrieval/dumped_data_all_papers . "				# Copies the 17GB file... will take some time
