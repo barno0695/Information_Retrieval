@@ -25,33 +25,32 @@ field_index = {
 	'operating_systems': 23
 }
 
-with open('reduced_authors.txt','r') as AuthorDataset:
-	AuthorDataset = AuthorDataset.read()
-print "File read"
-LTE2005 = []
-AuthorDataset = AuthorDataset.split('\n\n##\n')
-for Author in AuthorDataset:
-	count_variable = [0]*24
-	infos = Author.split('\n\n')
-	try:
-		AuthorName,AuthorID = infos[0].split(' : ')
-		LTE2005.append(infos[0]+'\n')
-		for paper in infos[1:]:
-			try:
-				year = int(paper.split('\n')[1].replace(' : ',''))
-				if year<=2005:
-					field_name = paper.split('\n')[2].split()[1]
-					if(AuthorName=='Alexandros Agapitos' and field_name=='artificial_intelligence'):
-						print "Yo"
-					count_variable[field_index[field_name.strip()]]+=1
-			except:
-				print "Exception : Year coming out to be", paper.split('\n')[1].replace(' : ','')
-	except Exception, e:
-		print "Except in", infos
-		print '\n', e, '\n'
-	for i in count_variable:
-		LTE2005.append(str(i)+' ')
-	LTE2005.append('\n\n')
-print 'Datasets Created'
-with open('field_frequency_vector.txt','w') as File:
-	File.write(''.join(LTE2005))
+def startFromScratch():
+	with open('reduced_authors.txt','r') as AuthorDataset:
+		AuthorDataset = AuthorDataset.read()
+	print "File read"
+	LTE2005 = []
+	AuthorDataset = AuthorDataset.split('\n\n##\n')[:-1]
+	for Author in AuthorDataset:
+		count_variable = [0]*24
+		infos = Author.split('\n\n')
+		try:
+			AuthorName,AuthorID = infos[0].split(' : ')
+			LTE2005.append(infos[0]+'\n')
+			for paper in infos[1:]:
+				try:
+					year = int(paper.split('\n')[1].replace(' : ',''))
+					if year<=2005:
+						field_name = paper.split('\n')[2].split()[1]
+						count_variable[field_index[field_name.strip()]]+=1
+				except:
+					print "Exception : Year coming out to be", paper.split('\n')[1].replace(' : ','')
+		except Exception, e:
+			print "Except in", infos
+			print '\n', e, '\n'
+		for i in count_variable:
+			LTE2005.append(str(i)+' ')
+		LTE2005.append('\n\n')
+	print 'Datasets Created'
+	with open('field_frequency_vector.txt','w') as File:
+		File.write(''.join(LTE2005))

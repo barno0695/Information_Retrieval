@@ -1,3 +1,4 @@
+# Author - Priyank Palod
 with open('reduced_authors.txt','r') as AuthorDataset:
 	AuthorDataset = AuthorDataset.read()
 print "File read"

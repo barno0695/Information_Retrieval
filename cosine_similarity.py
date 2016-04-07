@@ -1,20 +1,17 @@
 import math
 import numpy
-import heapq
-# # File containing Topic Names and there corresponding count
-# vector_file_researcher_1 = open("researcher_file_1.txt","r")
-# vector1 = vector_file_researcher_1.readline()
-# vector_file_researcher_2 = open("researcher_file_2.txt","r")
-# vector2 = vector_file_researcher_2.readline()
-
+try:
+	import cPickle as pickle
+except:
+	import pickle
 
 def cosine_simlarity(vector1,vector2):
-	sum = 0
+	sumx = 0
 	norm1 = 0.0
 	norm2 = 0.0
 
 	for element1,element2 in zip(vector1,vector2):
-	    sum = sum + element1*element2
+	    sumx = sumx + element1*element2
 	    norm1 = norm1 + element1 * element1
 	    norm2 = norm2 + element2 * element2     
 
@@ -22,7 +19,10 @@ def cosine_simlarity(vector1,vector2):
 	norm1 = math.sqrt(norm1)
 	norm2 = math.sqrt(norm2)
 
-	ans = sum/(norm1*norm2)
+	if norm1==0 or norm2==0:
+		ans = 0
+	else:
+		ans = sumx/(norm1*norm2)
 
 	return ans
 
@@ -31,7 +31,7 @@ def loadVectors(filename):
 	IdtoPosition = {}
 	with open(filename,'r') as VectorsFile:
 		VectorsFile = VectorsFile.read()
-	authors = VectorsFile.split('\n\n')
+	authors = VectorsFile.split('\n\n')[:-1]
 	pos = 0;
 	for author in authors:
 		try:
@@ -41,17 +41,21 @@ def loadVectors(filename):
 		Id = int(author_details.split(' : ')[1])
 		IdtoPosition[Id] = pos
 		pos += 1
+		print IdtoPosition[Id]
 		dictionary[Id] = [int(val) for val in vector.strip().split(' ')]
 	return dictionary,IdtoPosition
 
 
-NumberOfTopDistancesToKeep = 100
-
-IdtoVector, IdtoPosition = loadVectors('field_frequency_vector.txt')
-print 'size of matrix = ',len(IdtoVector)
-matrix = numpy.zeros((len(IdtoVector),NumberOfTopDistancesToKeep)
-for Id1 in IdtoVector:
-	for Id2 in IdtoVector:
-		sim = cosine_simlarity(IdtoVector[Id1],IdtoVector[Id2])
-		matrix[IdtoPosition[Id1]][IdtoPosition[Id2]] = sim
-	print 'row done'
+def startFromScratch():
+	IdtoVector, IdtoPosition = loadVectors('field_frequency_vector.txt')
+	print 'size of matrix = ',len(IdtoVector)
+	i = 0
+	matrix = numpy.zeros((len(IdtoVector),len(IdtoVector)))
+	for Id1 in IdtoVector:
+		for Id2 in IdtoVector:
+			sim = cosine_simlarity(IdtoVector[Id1],IdtoVector[Id2])
+			matrix[IdtoPosition[Id1]][IdtoPosition[Id2]] = sim
+		print 'row done', i
+		i+=1
+	pickle.dump(IdtoPosition,open('IdtoMatrixPositionAuthors.p','wb'))
+	numpy.save('cosine_distances_fields',matrix)
