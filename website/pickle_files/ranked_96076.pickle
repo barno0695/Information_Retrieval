@@ -1,0 +1,45 @@
+(lp0
+(dp1
+S'Name'
+p2
+S'Mario Baldi'
+p3
+sS'Rank'
+p4
+S'0.98'
+p5
+sS'ID'
+p6
+S'513051'
+p7
+sa(dp8
+g2
+S'M. Stella Atkins'
+p9
+sg4
+S'0.75'
+p10
+sg6
+S'1403509'
+p11
+sa(dp12
+g2
+S'P. W. Shor'
+p13
+sg4
+S'0.74'
+p14
+sg6
+S'96076'
+p15
+sa(dp16
+g2
+S'U. Moon'
+p17
+sg4
+S'0.65'
+p18
+sg6
+S'1890475'
+p19
+sa.
